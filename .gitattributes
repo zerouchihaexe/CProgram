@@ -1,2 +1,115 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+#include <stdio.h>
+
+struct Student
+{
+    int studentID;
+    char studentName[50];
+    float maths;
+    float physics;
+    float biology;
+    float chemistry;
+    float computerscience;
+};
+
+int main()
+{
+    int choice;
+    int maxStudents = 0;
+    struct Student students[100];
+    
+    printf("Welcome to Student Grade Book\n");
+    
+    do
+    
+    {
+        printf("\nEnter choice:\n");
+        printf("1. Add Student\n");
+        printf("2. Student Grading\n");
+        printf("3. Data Book of Students\n");
+        printf("4. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        printf("\n");
+
+        switch (choice)
+        {
+        case 1:
+            if (maxStudents >= 100)
+            {
+                printf("Maximum number of students reached!\n");
+                break;
+            }
+            
+
+            printf("Enter student name: ");
+            scanf("%s", students[maxStudents].studentName);
+
+            printf("Enter Student ID: ");
+            scanf("%d", &students[maxStudents].studentID);
+
+            maxStudents++;
+            break;
+
+        case 2:
+            printf("Enter student ID: ");
+            int searchID;
+            scanf("%d", &searchID);
+            for (int i = 0; i < maxStudents; i++)
+            {
+                if (students[i].studentID == searchID)
+                {
+                    printf("Student found!\n");
+                    printf("Name: %s\n", students[i].studentName);
+                    printf("ID: %d\n", students[i].studentID);
+                    printf("Enter student grade for Maths: ");
+                    scanf("%f", &students[i].maths);
+                    printf("Enter student grade for Physics: ");
+                    scanf("%f", &students[i].physics);
+                    printf("Enter student grade for Biology: ");
+                    scanf("%f", &students[i].biology);
+                    printf("Enter student grade for Chemistry: ");
+                    scanf("%f", &students[i].chemistry);
+                    printf("Enter student grade for Computer Science: ");
+                    scanf("%f", &students[i].computerscience);
+                }
+                else if(students[i].studentID != searchID)
+                {
+                    printf("Invalid Option!");
+                }
+            }
+            break;
+
+        case 3:
+            printf("Data Book of Students:\n");
+            for (int i = 0; i < maxStudents; i++)
+            {
+                printf("Student %d\n", i + 1);
+                printf("Name: %s\n",students[i].studentName);
+                printf("ID: %d\n",students[i].studentID);
+                printf("Maths: %.2f\n",students[i].maths);
+                printf("Physics: %.2f\n",students[i].physics);
+                printf("Biology: %.2f\n",students[i].biology);
+                printf("Chemistry: %.2f\n",students[i].chemistry);
+                printf("Computer Science: %.2f\n",students[i].computerscience);
+
+                float average = (students[i].maths + students[i].physics + students[i].biology + students[i].chemistry + students[i].computerscience) / 5;
+                printf("Average: %.2f\n", average);
+                
+                printf("\n");
+            }
+            break;
+
+        case 4:
+            printf("Exiting Grade Book...\n");
+            printf("\n");
+            printf("Exited Successfully, Good bye\n");
+            break;
+
+        default:
+            printf("Invalid Choice!\n");
+        }
+    } while(choice != 4);
+
+    return 0;
+}
+
